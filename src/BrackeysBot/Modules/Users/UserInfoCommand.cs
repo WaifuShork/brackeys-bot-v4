@@ -1,4 +1,5 @@
-﻿using System.Buffers;
+﻿using System;
+using System.Buffers;
 using System.Linq;
 using System.Threading.Tasks;
 using BrackeysBot.Extensions;
@@ -15,10 +16,8 @@ namespace BrackeysBot.Modules
         [Description("Displays information about a specified user.")]
         public async Task DisplayUserInfoAsync(CommandContext ctx, DiscordMember member = null)
         {
-            var t = ArrayPool<string>.Shared.Rent(100);
-            ArrayPool<string>.Shared.Return(t);
             member ??= (DiscordMember) ctx.Message.Author;
-            
+
             var userColor = DiscordColor.LightGray;
 
             var roles = member.Roles.ToList();

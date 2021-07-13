@@ -6,7 +6,7 @@ namespace BrackeysBot
     {
         private static async Task<int> Main()
         {
-            return await BrackeysBotHost.RunAsync();
+            return await BrackeysBotHost.RunHostAsync();
         }
     }
 }

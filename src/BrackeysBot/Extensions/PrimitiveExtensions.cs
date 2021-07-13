@@ -16,27 +16,7 @@ namespace BrackeysBot.Extensions
         {
             return s.AsNullIfEmpty() ?? alternative;
         }
-        
-        public static string Envelop(this string s, string outer)
-        {
-            return new StringBuilder().Append(outer).Append(s).Append(outer).ToString();
-        }
-
-        public static string Envelop(this string s, string prefix, string postfix)
-        {
-            return new StringBuilder().Append(prefix).Append(s).Append(postfix).ToString();
-        }
-
-        public static string Sanitize(this string typeName)
-        {
-            return typeName.Replace("Module", string.Empty);
-        }
-
-        public static string Prettify(this string name)
-        {
-            return Regex.Replace(name, @"(?<!^)(?=[A-Z])", " ");
-        }
-        
+ 
         public static string TrimTo(this string str, int maxLength, bool hideDots = false)
         {
             if (maxLength < 0)
