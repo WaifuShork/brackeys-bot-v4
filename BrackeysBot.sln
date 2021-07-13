@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrackeysBot", "src\BrackeysBot\BrackeysBot.csproj", "{2F296927-1F1D-44F1-BA4D-86A45BF4ABA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrackeysBot.Database", "src\BrackeysBot.Database\BrackeysBot.Database.csproj", "{6225890A-0AC1-40EB-ACDE-47EA3DEE3D56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F296927-1F1D-44F1-BA4D-86A45BF4ABA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F296927-1F1D-44F1-BA4D-86A45BF4ABA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F296927-1F1D-44F1-BA4D-86A45BF4ABA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F296927-1F1D-44F1-BA4D-86A45BF4ABA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6225890A-0AC1-40EB-ACDE-47EA3DEE3D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6225890A-0AC1-40EB-ACDE-47EA3DEE3D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6225890A-0AC1-40EB-ACDE-47EA3DEE3D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6225890A-0AC1-40EB-ACDE-47EA3DEE3D56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
