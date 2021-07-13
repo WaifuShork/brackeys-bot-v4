@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using BrackeysBot.Configuration;
+using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 
 namespace BrackeysBot.Modules
 {

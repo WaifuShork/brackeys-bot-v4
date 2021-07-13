@@ -1,21 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using BrackeysBot.Configuration;
+
 using BrackeysBot.Database;
 using BrackeysBot.Extensions;
+using BrackeysBot.SlashModules;
+using BrackeysBot.Configuration;
+
 using DSharpPlus;
+using DSharpPlus.Entities;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.SlashCommands;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext.Exceptions;
-using DSharpPlus.Entities;
-using Microsoft.Extensions.DependencyInjection;
+using DSharpPlus.SlashCommands.EventArgs;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using Microsoft.Extensions.DependencyInjection;
+
 using Serilog;
 using Serilog.Events;
+using Newtonsoft.Json;
 
 namespace BrackeysBot
 {
@@ -65,11 +72,16 @@ namespace BrackeysBot
                 StringPrefixes = new[] { _configuration.Prefix },
                 CaseSensitive = false,
             });
-            
+
+            var slashCommands = _client.UseSlashCommands();
+
             try
             {
                 commands.RegisterCommands(Assembly.GetExecutingAssembly());
                 commands.RegisterCommandEvents();
+                
+                slashCommands.RegisterSlashCommands(Assembly.GetExecutingAssembly());
+                slashCommands.RegisterSlashCommandEvents();
                 
                 await _client.ConnectAsync();
                 await Task.Delay(-1);
@@ -92,18 +104,56 @@ namespace BrackeysBot
             commands.CommandErrored += async (sender, args) => await OnCommandErrorAsync(sender, args);
         }
 
+        private static void RegisterSlashCommandEvents(this SlashCommandsExtension slashCommands)
+        {
+            slashCommands.SlashCommandErrored += async (sender, args) => await OnSlashCommandErrorAsync(sender, args);
+        }
+        
+        private static void RegisterSlashCommands(this SlashCommandsExtension slashCommands, Assembly assembly)
+        {
+            var commands = assembly.GetExportedTypes().Where(t => t.BaseType == typeof(SlashCommandModule));
+
+            foreach (var command in commands)
+            {
+                slashCommands.RegisterCommands(command, _configuration.GuildID);
+            }
+        }
+
+        private static Task OnSlashCommandErrorAsync(SlashCommandsExtension sender, SlashCommandErrorEventArgs args)
+        {
+            switch (args.Exception)
+            {
+                case SlashExecutionChecksFailedException checksFailedException:
+                    break;
+            }
+
+            return Task.CompletedTask;
+        }
+
+
         // I feel like this could be moved but does it really matter? the library is already handling all the heavy lifting
         private static async Task OnCommandErrorAsync(CommandsNextExtension commands, CommandErrorEventArgs args)
         {
-            var failedChecks = ((ChecksFailedException) args.Exception).FailedChecks;
-            if (failedChecks.OfType<RequireRolesAttribute>().Any())
+            // Basically equivalent to IResult in Discord.NET, but with exceptions... 
+            switch (args.Exception)
             {
-                await args.Context.Channel.SendColoredEmbedAsync("Access denied.", DiscordColor.Red);
-            }
-
-            if (failedChecks.OfType<RequireGuildAttribute>().Any())
-            {
-                await args.Context.Channel.SendColoredEmbedAsync("This command can only be executed in a guild", DiscordColor.Red);
+                case ChecksFailedException checksFailedException:
+                    var failedChecks = checksFailedException.FailedChecks;
+                    // Unlike V3, we can add [RequireGuild] on every module, then selectively enable commands to be allowed in DMs,
+                    // this way nothing will slip through and accidentally be allowed in DMs that isn't meant to be
+                    if (failedChecks.OfType<RequireGuildAttribute>().Any())
+                    {
+                        await args.Context.Channel.SendColoredEmbedAsync("This command can only be executed in a guild", DiscordColor.Red);
+                    }
+                    break;
+                case CommandNotFoundException commandNotFoundException:
+                    break;
+                case DuplicateCommandException duplicateCommandException:
+                    break;
+                case DuplicateOverloadException duplicateOverloadException:
+                    break;
+                case InvalidOverloadException invalidOverloadException:
+                    break;
             }
         }
 
