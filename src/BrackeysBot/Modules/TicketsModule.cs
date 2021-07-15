@@ -1,4 +1,4 @@
-﻿using DSharpPlus.CommandsNext;
+﻿using DSharpPlusNextGen.CommandsNext;
 
 namespace BrackeysBot.Modules
 {

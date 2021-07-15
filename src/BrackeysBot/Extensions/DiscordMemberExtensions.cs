@@ -1,5 +1,5 @@
-﻿using DSharpPlus;
-using DSharpPlus.Entities;
+﻿using DSharpPlusNextGen;
+using DSharpPlusNextGen.Entities;
 
 namespace BrackeysBot.Extensions
 {

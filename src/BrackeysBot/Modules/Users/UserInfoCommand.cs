@@ -3,9 +3,9 @@ using System.Buffers;
 using System.Linq;
 using System.Threading.Tasks;
 using BrackeysBot.Extensions;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.Entities;
+using DSharpPlusNextGen.CommandsNext;
+using DSharpPlusNextGen.CommandsNext.Attributes;
+using DSharpPlusNextGen.Entities;
 using Humanizer;
 
 namespace BrackeysBot.Modules

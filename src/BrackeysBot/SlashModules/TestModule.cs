@@ -2,10 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using BrackeysBot.Extensions;
-using DSharpPlus;
-using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
-using Emzi0767;
+using DSharpPlusNextGen;
+using DSharpPlusNextGen.Entities;
+using DSharpPlusNextGen.SlashCommands;
 using Humanizer;
 using Serilog;
 

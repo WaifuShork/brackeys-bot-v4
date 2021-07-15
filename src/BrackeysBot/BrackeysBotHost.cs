@@ -8,15 +8,16 @@ using BrackeysBot.Database;
 using BrackeysBot.Extensions;
 using BrackeysBot.Configuration;
 
-using DSharpPlus;
-using DSharpPlus.Entities;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.SlashCommands;
-using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.CommandsNext.Exceptions;
-using DSharpPlus.Interactivity;
-using DSharpPlus.Interactivity.Enums;
-using DSharpPlus.Interactivity.Extensions;
+using DSharpPlusNextGen;
+using DSharpPlusNextGen.Entities;
+using DSharpPlusNextGen.CommandsNext;
+using DSharpPlusNextGen.Interactivity;
+using DSharpPlusNextGen.SlashCommands;
+using DSharpPlusNextGen.Interactivity.Enums;
+using DSharpPlusNextGen.CommandsNext.Attributes;
+using DSharpPlusNextGen.CommandsNext.Exceptions;
+using DSharpPlusNextGen.Interactivity.Extensions;
+
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -183,7 +184,7 @@ namespace BrackeysBot
 
             foreach (var command in commands)
             {
-                slashCommands.RegisterCommands(command, _configuration.GuildID);
+                slashCommands.RegisterCommands(command);
             }
         }
     }

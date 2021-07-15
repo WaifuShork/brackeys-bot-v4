@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DSharpPlus.Entities;
+using DSharpPlusNextGen.Entities;
 
 namespace BrackeysBot.Extensions
 {

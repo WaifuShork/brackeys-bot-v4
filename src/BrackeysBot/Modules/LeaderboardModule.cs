@@ -1,5 +1,5 @@
-﻿using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
+﻿using DSharpPlusNextGen.CommandsNext;
+using DSharpPlusNextGen.CommandsNext.Attributes;
 
 namespace BrackeysBot.Modules
 {
